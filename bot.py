@@ -284,5 +284,6 @@ def main():
     print("Notifications sent:", notifications)
 
 
+
 if __name__ == "__main__":
-    main()
+    send_telegram("✅ ТЕСТ CEnT-S\n\nБот успешно отправляет уведомления двум пользователям!")
