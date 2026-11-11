@@ -37,6 +37,9 @@ def get_slots():
         timeout=30,
         headers={"User-Agent": "CEnT-S-Availability-Monitor/1.0"}
     )
+    if not response.ok:
+    print("Telegram error:", response.status_code)
+    print("Telegram response:", response.text)
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, "html.parser")
