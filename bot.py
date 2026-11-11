@@ -23,7 +23,31 @@ CALENDARS = [
 ]
 
 
+
 def send_telegram(message):
+    for chat_id in CHAT_IDS:
+        response = requests.post(
+            f"https://api.telegram.org/bot{TOKEN}/sendMessage",
+            json={
+                "chat_id": chat_id,
+                "text": message,
+                "disable_web_page_preview": True,
+            },
+            timeout=30,
+        )
+
+        if not response.ok:
+            try:
+                print(
+                    "Telegram error:",
+                    chat_id,
+                    response.json().get("description"),
+                )
+            except ValueError:
+                print("Telegram HTTP error:", response.status_code)
+
+        response.raise_for_status()
+
     response = requests.post(
         f"https://api.telegram.org/bot{TOKEN}/sendMessage",
         json={
