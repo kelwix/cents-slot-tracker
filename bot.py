@@ -17,6 +17,7 @@ CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 STATE_FILE = "seen_slots.json"
 
 
+
 def notify(message):
     response = requests.post(
         f"https://api.telegram.org/bot{TOKEN}/sendMessage",
@@ -27,7 +28,12 @@ def notify(message):
         },
         timeout=20
     )
-    response.raise_for_status()
+
+    if not response.ok:
+        print("Telegram error:", response.status_code)
+        print("Telegram response:", response.text)
+        response.raise_for_status()
+
 
 
 def get_slots():
