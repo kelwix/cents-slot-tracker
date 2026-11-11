@@ -1,1 +1,38 @@
-[]
+{
+  "UNIVERSITA' DEGLI STUDI DI TRIESTE|TRIESTE|26/11/2026|CENT@UNI": {
+    "available": true,
+    "seats": 93
+  },
+  "UNIVERSITA' DEGLI STUDI DI MESSINA|MESSINA|26/11/2026|CENT@UNI": {
+    "available": true,
+    "seats": 69
+  },
+  "SAPIENZA UNIVERSITÀ DI ROMA|ROMA|26/11/2026|CENT@HOME": {
+    "available": false,
+    "seats": null
+  },
+  "POLITECNICO DI MILANO|MILANO|26/11/2026|CENT@HOME": {
+    "available": false,
+    "seats": null
+  },
+  "UNIVERSITÀ DEGLI STUDI DI PADOVA|PADOVA|26/11/2026|CENT@HOME": {
+    "available": false,
+    "seats": null
+  },
+  "UNIVERSITÀ DEGLI STUDI DI TERAMO|TERAMO|26/11/2026|CENT@HOME": {
+    "available": false,
+    "seats": null
+  },
+  "UNIVERSITÀ CA' FOSCARI VENEZIA|VENEZIA|26/11/2026|CENT@HOME": {
+    "available": false,
+    "seats": null
+  },
+  "UNIVERSITA' DEGLI STUDI DI MESSINA|MESSINA|17/12/2026|CENT@UNI": {
+    "available": true,
+    "seats": 65
+  },
+  "POLITECNICO DI TORINO|TORINO|12/01/2027|CENT@UNI": {
+    "available": false,
+    "seats": null
+  }
+}
