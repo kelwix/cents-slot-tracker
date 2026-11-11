@@ -106,4 +106,5 @@ def main():
 
 
 if __name__ == "__main__":
+    notify("✅ Тест успешен! Трекер CEnT-S подключён к Telegram.")
     main()
