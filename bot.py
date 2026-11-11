@@ -12,7 +12,10 @@ URL = "https://testcisia.it/calendario.php"
 STATE_FILE = Path("seen_slots.json")
 
 TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
-CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
+CHAT_IDS = [
+    os.environ["TELEGRAM_CHAT_ID"],
+    os.environ["TELEGRAM_CHAT_ID_2"],
+]
 
 CALENDARS = [
     {"tolc": "cents", "l": "gb", "lingua": "inglese"},
