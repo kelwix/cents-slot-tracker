@@ -8,8 +8,8 @@
     "seats": null
   },
   "UNIVERSITÀ DEGLI STUDI DI PADOVA|PADOVA|26/11/2026|CENT@HOME": {
-    "available": false,
-    "seats": null
+    "available": true,
+    "seats": 13
   },
   "UNIVERSITÀ DEGLI STUDI DI TERAMO|TERAMO|26/11/2026|CENT@HOME": {
     "available": false,
