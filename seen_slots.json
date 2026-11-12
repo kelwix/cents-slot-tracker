@@ -18,5 +18,9 @@
   "UNIVERSITÀ CA' FOSCARI VENEZIA|VENEZIA|26/11/2026|CENT@HOME": {
     "available": false,
     "seats": null
+  },
+  "SAPIENZA UNIVERSITÀ DI ROMA|ROMA|17/12/2026|CENT@HOME": {
+    "available": false,
+    "seats": null
   }
 }
