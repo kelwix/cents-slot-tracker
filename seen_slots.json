@@ -1,12 +1,4 @@
 {
-  "UNIVERSITA' DEGLI STUDI DI TRIESTE|TRIESTE|26/11/2026|CENT@UNI": {
-    "available": true,
-    "seats": 93
-  },
-  "UNIVERSITA' DEGLI STUDI DI MESSINA|MESSINA|26/11/2026|CENT@UNI": {
-    "available": true,
-    "seats": 69
-  },
   "SAPIENZA UNIVERSITÀ DI ROMA|ROMA|26/11/2026|CENT@HOME": {
     "available": false,
     "seats": null
@@ -24,14 +16,6 @@
     "seats": null
   },
   "UNIVERSITÀ CA' FOSCARI VENEZIA|VENEZIA|26/11/2026|CENT@HOME": {
-    "available": false,
-    "seats": null
-  },
-  "UNIVERSITA' DEGLI STUDI DI MESSINA|MESSINA|17/12/2026|CENT@UNI": {
-    "available": true,
-    "seats": 65
-  },
-  "POLITECNICO DI TORINO|TORINO|12/01/2027|CENT@UNI": {
     "available": false,
     "seats": null
   }
