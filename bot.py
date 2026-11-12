@@ -1,4 +1,3 @@
-
 import json
 import os
 import re
@@ -8,10 +7,12 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
+
 URL = "https://testcisia.it/calendario.php"
 STATE_FILE = Path("seen_slots.json")
 
 TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
+
 CHAT_IDS = [
     os.environ["TELEGRAM_CHAT_ID"],
     os.environ["TELEGRAM_CHAT_ID_2"],
@@ -21,7 +22,6 @@ CALENDARS = [
     {"tolc": "cents", "l": "gb", "lingua": "inglese"},
     {"tolc": "cents", "l": "it", "lingua": "inglese"},
 ]
-
 
 
 def send_telegram(message):
@@ -44,27 +44,12 @@ def send_telegram(message):
                     response.json().get("description"),
                 )
             except ValueError:
-                print("Telegram HTTP error:", response.status_code)
+                print(
+                    "Telegram HTTP error:",
+                    response.status_code,
+                )
 
         response.raise_for_status()
-
-    response = requests.post(
-        f"https://api.telegram.org/bot{TOKEN}/sendMessage",
-        json={
-            "chat_id": CHAT_ID,
-            "text": message,
-            "disable_web_page_preview": True,
-        },
-        timeout=30,
-    )
-
-    if not response.ok:
-        try:
-            print("Telegram error:", response.json().get("description"))
-        except ValueError:
-            print("Telegram HTTP error:", response.status_code)
-
-    response.raise_for_status()
 
 
 def normalize(text):
@@ -80,9 +65,11 @@ def get_calendar(params):
         },
         timeout=40,
     )
+
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, "html.parser")
+
     sessions = {}
     recognized = 0
 
@@ -109,10 +96,10 @@ def get_calendar(params):
         exam_format = normalize(exam_format).replace(" ", "")
         status = normalize(status)
 
+        # ONLY HOME / CASA
         if exam_format not in (
             "CENT@HOME",
             "CENT@CASA",
-            "CENT@UNI",
         ):
             continue
 
@@ -147,7 +134,12 @@ def get_calendar(params):
         ])
 
         count_match = re.search(r"\d+", seats)
-        count = int(count_match.group()) if count_match else None
+
+        count = (
+            int(count_match.group())
+            if count_match
+            else None
+        )
 
         sessions[key] = {
             "university": university,
@@ -161,7 +153,7 @@ def get_calendar(params):
 
     if recognized == 0:
         raise RuntimeError(
-            "No CEnT-S sessions recognized. "
+            "No CEnT-S HOME sessions recognized. "
             "CISIA calendar structure may have changed."
         )
 
@@ -173,16 +165,18 @@ def collect_sessions():
 
     for params in CALENDARS:
         sessions = get_calendar(params)
+
         print(
             "Calendar language:",
             params["l"],
-            "| sessions:",
+            "| HOME sessions:",
             len(sessions),
         )
 
         for key, session in sessions.items():
             if key not in merged:
                 merged[key] = session
+
             elif merged[key]["available"] != session["available"]:
                 raise RuntimeError(
                     "English and Italian availability disagree: "
@@ -196,33 +190,38 @@ def load_history():
     if not STATE_FILE.exists():
         return {}
 
-    with STATE_FILE.open("r", encoding="utf-8") as file:
+    with STATE_FILE.open(
+        "r",
+        encoding="utf-8",
+    ) as file:
         saved = json.load(file)
 
     if isinstance(saved, dict):
         return saved
 
     if isinstance(saved, list):
-        # Compatibility with the previous tracker.
         return {}
 
-    raise RuntimeError("Invalid notification history format")
+    raise RuntimeError(
+        "Invalid notification history format"
+    )
 
 
 def make_message(session, reason):
-    exam_format = session["format"]
-    if exam_format == "CENT@HOME":
-        exam_format = "CENT@CASA / CENT@HOME"
-
     seats = session["seats"]
-    seats_text = str(seats) if seats is not None else "уточнить"
+
+    seats_text = (
+        str(seats)
+        if seats is not None
+        else "уточнить"
+    )
 
     return (
         "🟢 CEnT-S — СВОБОДНЫЕ МЕСТА!\n\n"
         f"🔔 {reason}\n"
         f"🏛 Университет: {session['university']}\n"
         f"📍 Город: {session['city']}\n"
-        f"🏠 Формат: {exam_format}\n"
+        "🏠 Формат: CEnT@CASA / CEnT@HOME\n"
         f"📅 Дата экзамена: {session['date']}\n"
         f"💺 Свободных мест: {seats_text}\n"
         f"⏳ Конец регистрации: {session['deadline']}\n\n"
@@ -255,17 +254,32 @@ def main():
 
         if old is None:
             reason = "Обнаружена доступная сессия"
-        elif isinstance(old, dict) and not old.get("available"):
+
+        elif (
+            isinstance(old, dict)
+            and not old.get("available")
+        ):
             reason = "Регистрация снова открылась"
-        elif isinstance(old, dict) and old.get("seats") != seats:
+
+        elif (
+            isinstance(old, dict)
+            and old.get("seats") != seats
+        ):
             reason = "Изменилось количество мест"
+
         else:
             continue
 
-        send_telegram(make_message(session, reason))
+        send_telegram(
+            make_message(session, reason)
+        )
+
         notifications += 1
 
-    with STATE_FILE.open("w", encoding="utf-8") as file:
+    with STATE_FILE.open(
+        "w",
+        encoding="utf-8",
+    ) as file:
         json.dump(
             current,
             file,
@@ -274,18 +288,31 @@ def main():
         )
 
     available_count = sum(
-        1 for session in sessions.values()
+        1
+        for session in sessions.values()
         if session["available"]
     )
 
-    print("Checked:", datetime.now(timezone.utc).isoformat())
-    print("Total CEnT-S sessions:", len(sessions))
-    print("Available sessions:", available_count)
-    print("Notifications sent:", notifications)
+    print(
+        "Checked:",
+        datetime.now(timezone.utc).isoformat(),
+    )
 
+    print(
+        "Total HOME sessions:",
+        len(sessions),
+    )
 
+    print(
+        "Available HOME sessions:",
+        available_count,
+    )
+
+    print(
+        "Notifications sent:",
+        notifications,
+    )
 
 
 if __name__ == "__main__":
     main()
-
