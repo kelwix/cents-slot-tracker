@@ -12,8 +12,8 @@
     "seats": null
   },
   "UNIVERSITÀ DEGLI STUDI DI TERAMO|TERAMO|26/11/2026|CENT@HOME": {
-    "available": true,
-    "seats": 3
+    "available": false,
+    "seats": null
   },
   "UNIVERSITÀ CA' FOSCARI VENEZIA|VENEZIA|26/11/2026|CENT@HOME": {
     "available": false,
