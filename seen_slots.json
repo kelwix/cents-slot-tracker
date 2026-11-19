@@ -4,8 +4,8 @@
     "seats": null
   },
   "POLITECNICO DI MILANO|MILANO|26/11/2026|CENT@HOME": {
-    "available": false,
-    "seats": null
+    "available": true,
+    "seats": 47
   },
   "UNIVERSITÀ DEGLI STUDI DI PADOVA|PADOVA|26/11/2026|CENT@HOME": {
     "available": false,
@@ -20,6 +20,10 @@
     "seats": null
   },
   "SAPIENZA UNIVERSITÀ DI ROMA|ROMA|17/12/2026|CENT@HOME": {
+    "available": false,
+    "seats": null
+  },
+  "POLITECNICO DI MILANO|MILANO|17/12/2026|CENT@HOME": {
     "available": false,
     "seats": null
   }
