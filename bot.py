@@ -113,13 +113,15 @@ def get_calendar(params):
             or "POSTI DISPONIBILI" in status
         )
 
-        closed = (
-            "NOT LONGER AVAILABLE" in status
-            or "POSTI ESAURITI" in status
-            or "CLOSED BOOKINGS" in status
-            or "ISCRIZIONI CHIUSE" in status
-            or "ISCRIZIONI CONCLUSE" in status
-        )
+      
+closed = (
+    "NOT LONGER AVAILABLE" in status
+    or "POSTI ESAURITI" in status
+    or "CLOSED BOOKINGS" in status
+    or "BOOKINGS CLOSED" in status
+    or "ISCRIZIONI CHIUSE" in status
+    or "ISCRIZIONI CONCLUSE" in status
+)
 
         if not available and not closed:
             raise RuntimeError(
