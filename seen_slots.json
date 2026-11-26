@@ -7,13 +7,17 @@
     "available": false,
     "seats": 0
   },
+  "SAPIENZA UNIVERSITÀ DI ROMA|ROMA|12/01/2027|CENT@HOME": {
+    "available": false,
+    "seats": null
+  },
   "SAPIENZA UNIVERSITÀ DI ROMA|ROMA|17/12/2026|CENT@HOME": {
     "available": false,
     "seats": null
   },
   "SAPIENZA UNIVERSITÀ DI ROMA|ROMA|26/11/2026|CENT@HOME": {
     "available": false,
-    "seats": 0
+    "seats": 7
   },
   "UNIVERSITÀ CA' FOSCARI VENEZIA|VENEZIA|26/11/2026|CENT@HOME": {
     "available": false,
